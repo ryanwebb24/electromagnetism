@@ -16,13 +16,6 @@ double Particle::getMass() {
     return mass;
 }
 
-void Particle::setQuad(Quadrant quad) {
-    currentQuad = quad;
-}
-Quadrant Particle::getQuad() {
-    return currentQuad;
-}
-
 void Particle::applyForce(PhysicsVector newForce) {
     force += newForce;
 }

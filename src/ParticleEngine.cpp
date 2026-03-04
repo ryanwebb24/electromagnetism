@@ -1,4 +1,5 @@
 #include "ParticleEngine.h"
+#include "Particle.h"
 
 void ParticleEngine::pushToQuad(Particle& particle, Quadrant quad) {
     particle.setQuad(quad);

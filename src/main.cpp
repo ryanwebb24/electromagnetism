@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "Particle.h"
+#include "PartilceEngine.h"
 
 int WINDOW_HEIGHT = 600;
 int WINDOW_WIDTH = 800;
@@ -36,20 +37,33 @@ int main() {
     SDL_Event event;
 
     const double physics_dt = 0.01;
-    PhysicsVector particlePos = PhysicsVector(100, 100);
-    Particle particle1(1.0, 1.0, particlePos);  // mass=1, charge=1
-    const PhysicsVector gravity(0, 9.8);        // downward acceleration
+    const PhysicsVector gravity(0, 9.8);
+    const int numberOfParticles = 100;// downward acceleration
+    
+    PartilceEngine particles();
 
     while (running) {
         // Handle events
         while (SDL_PollEvent(&event)) {
+            switch (event.type) {
+              case SDL_EVENT_QUIT:
+                running = false;
+                break
+              case SDL_EVENT_MOUSE_BUTTON_DOWN:
+
+              default:
+                
+                break;
+            }
             if (event.type == SDL_EVENT_QUIT) {
                 running = false;
             }
+            if (event.type == SDL_MOUSE)
         }
+        if (!running) break;
 
         // Physics update
-        // particle1.applyForce(gravity * particle1.getMass()); // Gravity stuff
+        particle1.applyForce(gravity * particle1.getMass()); // Gravity stuff
         particle1.update(physics_dt, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         // Render

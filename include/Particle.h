@@ -1,8 +1,8 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#include "ParticleEngine.h"
 #include "PhysicsVector.h"
+#include "Quadrant.h"
 
 class Particle {
    public:
@@ -12,8 +12,6 @@ class Particle {
     void update(double dt, int windowWidth, int windowHeight);
     void applyForce(PhysicsVector newForce);
     double getMass();
-    void setQuad(Quadrant quad);
-    Quadrant getQuad();
 
    private:
     PhysicsVector position;
@@ -22,7 +20,6 @@ class Particle {
     double charge;
     double mass;
     double bounceFactor = 0.7;
-    Quadrant currentQuad;
 };
 
 #endif

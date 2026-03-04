@@ -2,6 +2,7 @@
 #define PHYSICS_VECTOR_H
 
 #include <iostream>
+#include <vector>
 
 class PhysicsVector {
    public:
