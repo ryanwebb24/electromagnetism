@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Particle.h"
-#include "PartilceEngine.h"
+#include "ParticleEngine.h"
 
 int WINDOW_HEIGHT = 600;
 int WINDOW_WIDTH = 800;
@@ -38,45 +38,40 @@ int main() {
 
     const double physics_dt = 0.01;
     const PhysicsVector gravity(0, 9.8);
-    const int numberOfParticles = 100;// downward acceleration
-    
-    PartilceEngine particles();
+    const int numberOfParticles = 100;  // downward acceleration
+
+    ParticleEngine particles;
 
     while (running) {
         // Handle events
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
-              case SDL_EVENT_QUIT:
-                running = false;
-                break
-              case SDL_EVENT_MOUSE_BUTTON_DOWN:
-
-              default:
-                
-                break;
+                case SDL_EVENT_QUIT:
+                    running = false;
+                    break;
+                case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                    if (event.button.button == SDL_BUTTON_LEFT) {
+                        PhysicsVector pos(static_cast<int>(event.button.x), static_cast<int>(event.button.y));
+                        Particle particle(pos);
+                        particles.push(particle);
+                    }
+                    break;
+                default:
+                    break;
             }
-            if (event.type == SDL_EVENT_QUIT) {
-                running = false;
-            }
-            if (event.type == SDL_MOUSE)
         }
         if (!running) break;
 
         // Physics update
-        particle1.applyForce(gravity * particle1.getMass()); // Gravity stuff
-        particle1.update(physics_dt, WINDOW_WIDTH, WINDOW_HEIGHT);
+        // particle1.applyForce(gravity * particle1.getMass());  // Gravity stuff
+        // particle1.update(physics_dt, WINDOW_WIDTH, WINDOW_HEIGHT);
+        particles.updateAll(physics_dt, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         // Render
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_FRect rect;
-        rect.x = static_cast<int>(particle1.getPosition().getX());
-        rect.y = static_cast<int>(particle1.getPosition().getY());
-        rect.w = 5;
-        rect.h = 5;
-        SDL_RenderFillRect(renderer, &rect);
+        particles.draw(renderer);
 
         SDL_RenderPresent(renderer);
 
@@ -84,8 +79,8 @@ int main() {
     }
 
     std::cout << "Simulation ended.\n";
-    std::cout << "Particle: y=" << particle1.getPosition().getY()
-              << " x=" << particle1.getPosition().getX() << std::endl;
+    // std::cout << "Particle: y=" << particle1.getPosition().getY()
+    //          << " x=" << particle1.getPosition().getX() << std::endl;
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

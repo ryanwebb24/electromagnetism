@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Particle::Particle(double m, double q, const PhysicsVector& pos) : mass(m), charge(q), position(pos), velocity(0, 0), force(0, 0) {}
+Particle::Particle(const PhysicsVector& pos, double m, double q) : mass(m), charge(q), position(pos), velocity(0, 0), force(0, 0) {}
 
 PhysicsVector Particle::getPosition() {
     return position;
@@ -35,6 +35,5 @@ void Particle::update(double dt, int windowWidth, int windowHeight) {
         }
     }
     position += velocity * dt;
-    std::cout << position << std::endl;
     force = PhysicsVector();
 }

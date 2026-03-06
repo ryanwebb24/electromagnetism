@@ -1,23 +1,25 @@
 #include "ParticleEngine.h"
+
 #include "Particle.h"
 
-void ParticleEngine::pushToQuad(Particle& particle, Quadrant quad) {
-    particle.setQuad(quad);
-    switch (quad) {
-        case Quadrant::BL:
-            particleQuadBL.push_back(particle);
-            break;
-        case Quadrant::TL:
-            particleQuadTL.push_back(particle);
-            break;
-        case Quadrant::BR:
-            particleQuadBR.push_back(particle);
-            break;
-        case Quadrant::TR:
-            particleQuadTR.push_back(particle);
-            break;
+void ParticleEngine::push(Particle& particle) {
+    particles.push_back(particle);
+}
 
-        default:
-            break;
+void ParticleEngine::updateAll(double dt, int windowWidth, int windowHeight) {
+    for (Particle& particle : particles) {
+        particle.update(dt, windowWidth, windowHeight);
+    }
+}
+
+void ParticleEngine::draw(SDL_Renderer* renderer) {
+    for (Particle& particle : particles) {
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_FRect rect;
+        rect.x = static_cast<int>(particle.getPosition().getX());
+        rect.y = static_cast<int>(particle.getPosition().getY());
+        rect.w = 5;
+        rect.h = 5;
+        SDL_RenderFillRect(renderer, &rect);
     }
 }

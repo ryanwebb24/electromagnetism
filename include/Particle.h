@@ -6,7 +6,7 @@
 
 class Particle {
    public:
-    Particle(double mass, double charge, const PhysicsVector& pos = PhysicsVector());
+    Particle(const PhysicsVector& pos = PhysicsVector(), double mass = 1.0, double charge = 1.0);
     PhysicsVector getPosition();
     PhysicsVector getVelocity();
     void update(double dt, int windowWidth, int windowHeight);

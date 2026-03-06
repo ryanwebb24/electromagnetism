@@ -15,12 +15,12 @@ include_directories(include)
 # Build SDL3 from vendored source
 add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 
-# Explicitly list source files
-add_executable(ElectroMagnetism
-    src/main.cpp
-    src/Particle.cpp
-    src/PhysicsVector.cpp
-)
+# Automatically gather all source and header files
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+file(GLOB_RECURSE HEADERS "include/*.h")
+
+# Create executable with all sources
+add_executable(ElectroMagnetism ${SOURCES} ${HEADERS})
 
 # Link SDL3 target
 target_link_libraries(ElectroMagnetism PRIVATE SDL3::SDL3)
