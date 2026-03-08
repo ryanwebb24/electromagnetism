@@ -16,6 +16,10 @@ double Particle::getMass() {
     return mass;
 }
 
+double Particle::getCharge(){
+  return charge;
+}
+
 void Particle::applyForce(PhysicsVector newForce) {
     force += newForce;
 }

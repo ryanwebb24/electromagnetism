@@ -12,6 +12,7 @@ class Particle {
     void update(double dt, int windowWidth, int windowHeight);
     void applyForce(PhysicsVector newForce);
     double getMass();
+    double getCharge();
 
    private:
     PhysicsVector position;

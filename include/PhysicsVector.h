@@ -13,13 +13,10 @@ class PhysicsVector {
     PhysicsVector operator*(double scalar) const;
     PhysicsVector& operator+=(const PhysicsVector& other);
 
-    PhysicsVector xComponent() {
-        return PhysicsVector(x, 0);
-    }
-    PhysicsVector yComponent() {
-        return PhysicsVector(0, y);
-    }
-
+    PhysicsVector xComponent();
+    PhysicsVector yComponent();
+    
+    
     double getX() const;
     double getY() const;
     void setY(double newY);

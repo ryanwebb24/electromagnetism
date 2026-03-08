@@ -31,3 +31,12 @@ void PhysicsVector::setX(double newX) {
 void PhysicsVector::setY(double newY) {
     y = newY;
 }
+PhysicsVector PhysicsVector::xComponent() {
+    return PhysicsVector(x, 0);
+}
+PhysicsVector PhysicsVector::yComponent() {
+    return PhysicsVector(0, y);
+}
+
+
+
